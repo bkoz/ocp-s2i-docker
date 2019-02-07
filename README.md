@@ -22,6 +22,11 @@ Each folder has bash scripts that are used to build the same basic Java Webapp i
 
 The **s2i** directory does a full build from source and includes an additional script,  **.s2i/bin/assemble**,  to enable remote debugging. You can then use `openshift-debug.sh` to debug in your local IDE and hot deploying changes as a WAR with `openshift-hotdeploy`
 
-The **s2i-binary** directory is the same as the s2i folder, but skips the maven build and copies over the war file. Debugging is also enabled via the **.s2i/bin/assemble** script
+The **s2i-binary** directory is the same as the s2i folder, but skips the maven build and copies over the war file. Debugging is also enabled via the **.s2i/bin/assemble** script.
+
+To push a new ROOT.war file from a local directory, copy it in place and run the following command.
+```
+oc start-build eap-s2i-binary --from-dir=.
+```
 
 The **docker** directory uses a docker file to build the application and pushes to the local docker registry. If linked to Openshift, the image can be deployed using the web console or `oc` tool.
